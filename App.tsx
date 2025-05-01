@@ -5,7 +5,7 @@ const App = () => {
   return (
     <SafeAreaView
       style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Subhash Instagram</Text>
+      <Text>Subhash Patel Ka Instagram </Text>
     </SafeAreaView>
   );
 };
