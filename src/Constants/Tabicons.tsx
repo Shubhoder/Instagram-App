@@ -1,4 +1,4 @@
-import MaterialDesignIcons from '@react-native-vector-icons/material-design-icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface IconProps {
   route: string;
@@ -15,7 +15,7 @@ export const getTabIcon = ({route, focused, color, size}: IconProps) => {
       iconName = focused ? 'home' : 'home';
       break;
     case 'Search':
-      iconName = focused ? 'search' : 'magnify';
+      iconName = focused ? 'magnify' : 'magnify';
       break;
     case 'Post':
       iconName = focused ? 'plus-box' : 'plus-box-outline';
@@ -30,5 +30,5 @@ export const getTabIcon = ({route, focused, color, size}: IconProps) => {
       iconName = 'help-circle-outline';
   }
 
-  return <MaterialDesignIcons name={iconName} size={size} color={color} />;
+  return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
 };
