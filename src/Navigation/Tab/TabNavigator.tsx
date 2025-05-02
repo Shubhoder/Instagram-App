@@ -8,6 +8,7 @@ import Reels from '../../Screens/Reels/Reels';
 import Profile from '../../Screens/Profile/Profile';
 
 import {getTabIcon} from '../../Constants/Tabicons';
+import HomeStackNavigator from '../HomeStack/HomeStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +30,7 @@ const TabNavigator = () => {
           height: 60,
         },
       })}>
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Home" component={HomeStackNavigator} />
       <Tab.Screen name="Search" component={Search} />
       <Tab.Screen name="Post" component={Post} />
       <Tab.Screen name="Reels" component={Reels} />
