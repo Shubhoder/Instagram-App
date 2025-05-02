@@ -5,14 +5,13 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
-  FlatList,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {HomeStackParamList} from '../../types/Navigation';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import Stories from '../../Components/Stories/StoriesComponent';
-import Post from '../../Components/Post/PostComponent';
+import PostsWithImages from '../../Components/Post/PostComponent';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
@@ -21,8 +20,6 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 
 const Home = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
-
-  const dummyPosts = Array.from({length: 5}, (_, i) => i);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -53,12 +50,7 @@ const Home = () => {
       <Stories />
 
       {/* Feed */}
-      <FlatList
-        data={dummyPosts}
-        keyExtractor={item => item.toString()}
-        renderItem={({item}) => <Post index={item} />}
-        showsVerticalScrollIndicator={false}
-      />
+      <PostsWithImages />
     </SafeAreaView>
   );
 };

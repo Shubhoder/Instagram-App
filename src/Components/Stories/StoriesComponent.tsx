@@ -1,23 +1,69 @@
 import React from 'react';
-import {View, ScrollView, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, ScrollView, Text, StyleSheet, Image} from 'react-native';
 
-const screenWidth = Dimensions.get('window').width;
+const stories = [
+  {
+    id: '1',
+    name: 'Subhash',
+    image: require('../../Asset/images/StoryImages/01.jpg'),
+  },
+  {
+    id: '2',
+    name: 'Ravi',
+    image: require('../../Asset/images/StoryImages/02.jpg'),
+  },
+  {
+    id: '3',
+    name: 'Suresh',
+    image: require('../../Asset/images/StoryImages/03.jpg'),
+  },
+  {
+    id: '4',
+    name: 'Anita',
+    image: require('../../Asset/images/StoryImages/04.jpg'),
+  },
+  {
+    id: '5',
+    name: 'Amit',
+    image: require('../../Asset/images/StoryImages/05.jpg'),
+  },
+  {
+    id: '6',
+    name: 'Priya',
+    image: require('../../Asset/images/StoryImages/06.jpg'),
+  },
+  {
+    id: '7',
+    name: 'Karan',
+    image: require('../../Asset/images/StoryImages/07.png'),
+  },
+  {
+    id: '8',
+    name: 'Pooja',
+    image: require('../../Asset/images/StoryImages/08.jpg'),
+  },
+  {
+    id: '9',
+    name: 'Neha',
+    image: require('../../Asset/images/StoryImages/09.jpg'),
+  },
+  {
+    id: '10',
+    name: 'Meena',
+    image: require('../../Asset/images/StoryImages/10.jpg'),
+  },
+];
 
-const Stories = () => {
-  const dummyStories = Array.from({length: 10}, (_, i) => ({
-    id: i.toString(),
-    name: `User${i + 1}`,
-  }));
-
+const StoriesWithImages = () => {
   return (
     <View style={styles.container}>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}>
-        {dummyStories.map(story => (
+        {stories.map(story => (
           <View key={story.id} style={styles.story}>
-            <View style={styles.circle} />
+            <Image source={story.image} style={styles.circle} />
             <Text style={styles.text}>{story.name}</Text>
           </View>
         ))}
@@ -28,7 +74,7 @@ const Stories = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 100, // Ensures visibility
+    height: 100,
     backgroundColor: '#fff',
     paddingTop: 10,
   },
@@ -39,14 +85,13 @@ const styles = StyleSheet.create({
   story: {
     alignItems: 'center',
     marginRight: 15,
-    width: 70, // Ensures spacing
+    width: 70,
   },
   circle: {
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#ddd',
-    marginBottom: 5,
+    resizeMode: 'cover',
   },
   text: {
     fontSize: 12,
@@ -54,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Stories;
+export default StoriesWithImages;
