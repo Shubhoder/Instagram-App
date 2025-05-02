@@ -5,18 +5,24 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  FlatList,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {HomeStackParamList} from '../../Types/Navigation';
+import {HomeStackParamList} from '../../types/Navigation';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import Stories from '../../Components/Stories/StoriesComponent';
+import Post from '../../Components/Post/PostComponent';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
   'HomeScreen'
 >;
+
 const Home = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  const dummyPosts = Array.from({length: 5}, (_, i) => i);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,10 +49,16 @@ const Home = () => {
         </View>
       </View>
 
-      {/* Placeholder */}
-      <View style={styles.body}>
-        <Text>Feed will go here...</Text>
-      </View>
+      {/* Stories */}
+      <Stories />
+
+      {/* Feed */}
+      <FlatList
+        data={dummyPosts}
+        keyExtractor={item => item.toString()}
+        renderItem={({item}) => <Post index={item} />}
+        showsVerticalScrollIndicator={false}
+      />
     </SafeAreaView>
   );
 };
@@ -59,8 +71,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 15,
     paddingVertical: 12,
-    borderBottomWidth: 0.3,
-    borderBottomColor: '#ccc',
   },
   logo: {
     fontSize: 26,
@@ -70,11 +80,6 @@ const styles = StyleSheet.create({
   iconContainer: {
     flexDirection: 'row',
     gap: 20,
-  },
-  body: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
