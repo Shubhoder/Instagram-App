@@ -11,7 +11,7 @@ const Post = ({index}: {index: number}) => {
 
 const styles = StyleSheet.create({
   post: {
-    height: 500,
+    height: 550,
     borderBottomWidth: 0.5,
     borderBottomColor: '#eee',
     justifyContent: 'center',
