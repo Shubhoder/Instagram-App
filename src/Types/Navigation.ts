@@ -5,7 +5,6 @@ export type HomeStackParamList = {
 };
 
 export type SearchStackParamList = {
-  SearchHome: undefined;
-  SearchFocus: undefined;
-  SearchProfile: undefined;
+  SearchHome: {searchMode?: boolean} | undefined;
+  SearchProfile: {username: string};
 };

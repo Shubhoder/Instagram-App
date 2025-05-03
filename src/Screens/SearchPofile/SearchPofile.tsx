@@ -1,15 +1,24 @@
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {GlobalStyles} from '../GlobalStyle';
+import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
+import {RouteProp, useRoute} from '@react-navigation/native';
+import {SearchStackParamList} from '../../types/Navigation';
 
-const SearchPofile = () => {
+type ProfileRouteProp = RouteProp<SearchStackParamList, 'SearchProfile'>;
+
+const SearchProfile = () => {
+  const route = useRoute<ProfileRouteProp>();
+  const {username} = route.params;
+
   return (
-    <SafeAreaView style={GlobalStyles.center}>
-      <Text>SearchFeed</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.username}>Welcome to {username}'s profile</Text>
     </SafeAreaView>
   );
 };
 
-export default SearchPofile;
+export default SearchProfile;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  username: {fontSize: 20, fontWeight: 'bold'},
+});
