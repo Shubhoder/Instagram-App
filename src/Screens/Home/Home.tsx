@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  ScrollView,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -23,19 +24,18 @@ const Home = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.logo}>Instagram</Text>
-
         <View style={styles.iconContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('Likes')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Likes')}
+            style={styles.iconButton}>
             <MaterialCommunityIcons
               name="heart-outline"
               size={26}
               color="#000"
             />
           </TouchableOpacity>
-
           <TouchableOpacity onPress={() => navigation.navigate('Messages')}>
             <MaterialCommunityIcons
               name="facebook-messenger"
@@ -46,17 +46,21 @@ const Home = () => {
         </View>
       </View>
 
-      {/* Stories */}
-      <Stories />
-
-      {/* Feed */}
-      <PostsWithImages />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}>
+        <Stories />
+        <PostsWithImages />
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: '#fff'},
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -71,7 +75,12 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     flexDirection: 'row',
-    gap: 20,
+  },
+  iconButton: {
+    marginRight: 20,
+  },
+  scrollContent: {
+    paddingBottom: 20,
   },
 });
 

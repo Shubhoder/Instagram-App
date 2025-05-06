@@ -32,7 +32,7 @@ const TabNavigator = () => {
           tabBarButton: (props: any) => (
             <TouchableOpacity
               {...props}
-              delayLongPress={1000}
+              delayLongPress={500}
               onPress={() => navigation.navigate('Search', {})}
               onLongPress={() =>
                 navigation.navigate('Search', {
