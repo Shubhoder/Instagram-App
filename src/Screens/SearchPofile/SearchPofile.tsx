@@ -10,7 +10,7 @@ const SearchProfile = () => {
   const {username} = route.params;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <Text style={styles.username}>Welcome to {username}'s profile</Text>
     </SafeAreaView>
   );
