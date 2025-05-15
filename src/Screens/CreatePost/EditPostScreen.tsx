@@ -7,6 +7,7 @@ import {
   Image,
   StyleSheet,
   Alert,
+  SafeAreaView,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import {
@@ -80,7 +81,7 @@ const EditPostScreen = ({route, navigation}: Props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Edit Post</Text>
       <View style={styles.preview}>{renderImage()}</View>
 
@@ -109,7 +110,7 @@ const EditPostScreen = ({route, navigation}: Props) => {
           <Text style={styles.buttonText}>Next</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

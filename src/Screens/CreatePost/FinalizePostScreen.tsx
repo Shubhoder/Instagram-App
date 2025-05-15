@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
+import ViewShot from 'react-native-view-shot';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {PostStackParamList} from './Post';
 import {
@@ -25,8 +26,12 @@ const FinalizePostScreen = ({route, navigation}: Props) => {
   const [caption, setCaption] = useState('');
   const [tags, setTags] = useState('');
 
+  const viewShotRef = useRef<any>(null);
+
   const renderFilteredImage = () => {
-    const image = <Image source={{uri: imageUri}} style={styles.image} />;
+    const image = (
+      <Image source={{uri: imageUri}} style={styles.image} resizeMode="cover" />
+    );
 
     switch (filter) {
       case 'grayscale':
@@ -42,15 +47,29 @@ const FinalizePostScreen = ({route, navigation}: Props) => {
     }
   };
 
-  const handlePost = () => {
-    Alert.alert('Posted!', 'Your image with caption and tags has been posted.');
-    navigation.popToTop();
+  const handlePost = async () => {
+    try {
+      const uri = await viewShotRef.current.capture();
+
+      console.log('Captured Image Path:', uri);
+
+      Alert.alert('Posted!', `Filtered image saved:\n${uri}`);
+      navigation.popToTop();
+    } catch (error) {
+      console.error('Capture failed:', error);
+      Alert.alert('Error', 'Could not capture image.');
+    }
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Finalize Your Post</Text>
-      <View style={styles.preview}>{renderFilteredImage()}</View>
+
+      <ViewShot
+        ref={viewShotRef}
+        options={{format: 'jpg', quality: 0.9, result: 'tmpfile'}}>
+        <View style={styles.preview}>{renderFilteredImage()}</View>
+      </ViewShot>
 
       <TextInput
         placeholder="Write a caption..."
@@ -76,7 +95,7 @@ const FinalizePostScreen = ({route, navigation}: Props) => {
 const styles = StyleSheet.create({
   container: {padding: 16, backgroundColor: '#fff'},
   title: {fontSize: 20, fontWeight: 'bold', marginBottom: 10},
-  preview: {alignItems: 'center', marginBottom: 20},
+  preview: {alignItems: 'center', marginBottom: 20, backgroundColor: '#fff'},
   image: {width: 300, height: 300, borderRadius: 10},
   input: {
     borderWidth: 1,
